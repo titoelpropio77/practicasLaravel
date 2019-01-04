@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = [  
+    protected $fillable = [
     	'id',
     	'nombre',
     	'email',
@@ -20,6 +20,6 @@ class Message extends Model
     }
     public function note()
     {
-        return $this->hasOne(Note::class);
+        return $this->morphOne(Note::class,'notable');
     }
 }

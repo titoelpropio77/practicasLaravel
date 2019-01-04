@@ -16,8 +16,8 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth',['except'=>['show']]);
-       $this->middleware('roles:admin',['except'=>['edit','update','show']]);
+      // $this->middleware('auth',['except'=>['show']]);
+      // $this->middleware('roles:admin',['except'=>['edit','update','show']]);
     }
     public function index()
     {
@@ -45,7 +45,7 @@ class UsersController extends Controller
     public function store(RegisterUserRequest $request)
     {
         $user = User::create($request->all());
-        //return $request->all();
+
         $user->roles()->attach($request->roles);
 
         return redirect()->route('usuarios.index')->with(['info'=>'Creado Correctamente']);
@@ -87,7 +87,7 @@ class UsersController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $user = User::findOrFail($id);
-         $this->authorize('edit', $user);
+        // $this->authorize('edit', $user);
         $user->update($request->all());
         $user->roles()->sync($request->role);
         return back()->with('info','Usuario Actualizado');

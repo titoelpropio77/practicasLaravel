@@ -14,7 +14,7 @@
 
 		<!-- Custom styles for this template -->
 	</head>
-				<?php 
+				<?php
 				function activeMenu($url)
 				{
 						return request()->is($url) ? 'active' :'';
@@ -29,32 +29,32 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item {{  activeMenu('/') }}">
-						<a class="nav-link" href="<?php echo route('inicio') ?>">inicio</a> 
+						<a class="nav-link" href="<?php echo route('inicio') ?>">inicio</a>
 					</li>
 
 					 @if(auth()->check())
 					<li class="nav-item {{  activeMenu('contactos') }} ">
-						<a class="nav-link"  href="<?php echo route('mensaje.create') ?>">contactanos</a> 
+						<a class="nav-link"  href="<?php echo route('mensaje.create') ?>">contactanos</a>
 					</li>
 					@if(auth()->user()->hasRoles(['admin','estudiante']))
 					<li class="nav-item {{  activeMenu('usuarios') }} ">
-						<a class="nav-link"  href="<?php echo route('usuarios.index') ?>">Usuario</a> 
+						<a class="nav-link"  href="<?php echo route('usuarios.index') ?>">Usuario</a>
 					</li>
 					@endif
 					 @endif
 					 <li class="nav-item {{  activeMenu('mensaje') }} ">
-						<a class="nav-link"  href="<?php echo route('mensaje.index') ?>">Mensajes</a> 
+						<a class="nav-link"  href="<?php echo route('mensaje.index') ?>">Mensajes</a>
 					</li>
 				</ul>
 				<ul class="navbar-nav nav-bar-right">
 					 @if(auth()->check())
 					<li class="nav-item {{  activeMenu('logout') }}">
-						  <a class="nav-link"  href="logout">Cerrar session de {{ auth()->user()->email }}</a> 
+						  <a class="nav-link"  href="logout">Cerrar session de {{ auth()->user()->email }}</a>
 					</li>
 					 @endif
 					 @if (auth()->guest())
 					<li class="nav-item {{  activeMenu('login') }}">
-						<a class="nav-link "  href="login">Login</a> 
+						<a class="nav-link "  href="login">Login</a>
 					</li>
 					 @endif
 					 <li class="nav-item dropdown">
@@ -83,4 +83,4 @@
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	</body>
 </html>
-	
+
