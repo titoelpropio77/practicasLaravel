@@ -13,6 +13,7 @@ class MessageController extends Controller
      */
     public function index()
     {
+
         $mensajes = Message::all();
         return view('message.index',compact('mensajes'));
     }
@@ -37,7 +38,7 @@ class MessageController extends Controller
     {
         $message = Message::create($request->all());
        //dd(func_get_args());
-        if (auth()->check()) 
+        if (auth()->check())
         {
             auth()->user()->messages()->save($message)  ;
 
