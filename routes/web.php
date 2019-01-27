@@ -16,13 +16,12 @@ Route::get('roles',function(){
 	// return \App\Role::all();
 });
 Route::get('test',function(){
-$user= new App\User;
-$user->name='Elizabeth';
-$user->email='admin1';
-$user->role_id='2';
-$user->password=bcrypt('admin');
-$user->save();
-return $user;
+	$user= new App\User;
+	$user->name='Elizabeth';
+	$user->email='admin';
+	$user->password=bcrypt('admin');
+	$user->save();
+	return $user;
 });
 Route::get('/',['as'=>'inicio', function () {
    return view( 'home' );
