@@ -15,14 +15,14 @@ Route::get('roles',function(){
 	return \App\Role::with('user')->get();
 	// return \App\Role::all();
 });
-Route::get('test',function(){
-	$user= new App\User;
-	$user->name='Elizabeth';
-	$user->email='admin';
-	$user->password=bcrypt('admin');
-	$user->save();
-	return $user;
-});
+// Route::get('test',function(){
+// 	$user= new App\User;
+// 	$user->name='Elizabeth';
+// 	$user->email='admin';
+// 	$user->password=bcrypt('admin');
+// 	$user->save();
+// 	return $user;
+// });
 Route::get('/',['as'=>'inicio', function () {
    return view( 'home' );
 }]);
