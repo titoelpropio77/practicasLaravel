@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
 	protected $fillable = ['body'];
-    public function message()
+    // public function message()
+    // {
+    // 	return $this->belongsTo(Message::class);
+    // }
+    public function notetable()
     {
-    	return $this->belongsTo(Message::class);
+    	return $this->morphTo();
     }
 }

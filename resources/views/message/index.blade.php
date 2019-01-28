@@ -24,7 +24,9 @@
 			<td>
 				<a href="{{ route('mensaje.show',$mensaje->id) }}">{{ $mensaje->mensaje }}</a>
 			</td>
-			<td>{{ $mensaje->note->body }}</td>
+			<td>
+				{{ $mensaje->note->body ?? '' }}
+			</td>
 			<td>
 				<a href="<?php  echo route('mensaje.edit',$mensaje->id)  ?>" class="btn btn-primary btn-xs"	>Editar</a>
 			</td>

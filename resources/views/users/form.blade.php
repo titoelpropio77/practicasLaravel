@@ -31,11 +31,11 @@
 		<div class="checkbox">
 			@foreach($role as $id =>  $name)
 			<label>
-				<input 
-					type="checkbox" 
-					name="role[]" 
+				<input
+					type="checkbox"
+					name="role[]"
 					{{ $user->roles->pluck('id')->contains($id) ? 'checked' : '' }}
-					value="{{$id}}"> {{$name}} 
+					value="{{$id}}"> {{$name}}
 			</label>
 			@endforeach
 		</div>

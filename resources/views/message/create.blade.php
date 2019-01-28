@@ -4,7 +4,7 @@
 <h3>{{ session('info') }}</h3>
 @else
 <form method="POST"  action="{{ route('mensaje.store') }}" >
-	@include('message.form')
+	@include('message.form',['mensaje'=> new App\Message])
 </form>
 @endif
 
