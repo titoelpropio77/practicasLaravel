@@ -38,3 +38,4 @@ Route::post('login','Auth\LoginController@login');
 Route::get('logout','Auth\LoginController@logout');
 Route::resource('usuarios','UsersController');
 Route::resource('mensaje','MessageController');
+Route::resource('clients','ClientController');
