@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
-use App\Message;
-class MessageController extends Controller
+
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-
-        $mensajes = Message::all();
-        return view('message.index',compact('mensajes'));
+        $clientlist = Client::all();
+        return view( 'clients.index', compact( 'clientlist' ) );
     }
 
     /**
@@ -25,7 +25,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-       return view('message.create');
+        //
     }
 
     /**
@@ -36,53 +36,58 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = Message::create($request->all());
-       //dd(func_get_args());
-        if (auth()->check())
+        if ( $request->ajax() ) 
         {
-            auth()->user()->messages()->save($message)  ;
-
+            try {
+                $result[ 'status' ] = true;
+                $result[ 'message' ] = 'Guardado Correctamente';
+                Client::create($request->all());
+                return response()->json( $result );    
+            } catch (Exception $e) {
+                
+            }
+            
         }
-
-        return redirect()->route('mensaje.create')->with('info','Hemos recibido tu mensaje');
     }
 
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable');
-    }
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
-        $mensajes = Message::find($id);
-        return view('message.show',compact('mensajes'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $mensaje = Message::find($id);
-        return view('message.edit',compact('mensaje'));
+        try {
+            $clientList = Client::find($client);
+            $result[ 'data' ] = $clientList;
+            $result[ 'status' ] = true;
+            return response()->json( $result );
+        } catch (Exception $e) {
+            
+        }
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
         //
     }
@@ -90,10 +95,10 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
         //
     }

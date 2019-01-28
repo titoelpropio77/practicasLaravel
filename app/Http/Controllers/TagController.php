@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
-use App\Message;
-class MessageController extends Controller
+
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-
-        $mensajes = Message::all();
-        return view('message.index',compact('mensajes'));
+        //
     }
 
     /**
@@ -25,7 +24,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-       return view('message.create');
+        //
     }
 
     /**
@@ -36,53 +35,39 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = Message::create($request->all());
-       //dd(func_get_args());
-        if (auth()->check())
-        {
-            auth()->user()->messages()->save($message)  ;
-
-        }
-
-        return redirect()->route('mensaje.create')->with('info','Hemos recibido tu mensaje');
+        //
     }
 
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable');
-    }
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tag $tag)
     {
-        $mensajes = Message::find($id);
-        return view('message.show',compact('mensajes'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        $mensaje = Message::find($id);
-        return view('message.edit',compact('mensaje'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -90,10 +75,10 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
         //
     }

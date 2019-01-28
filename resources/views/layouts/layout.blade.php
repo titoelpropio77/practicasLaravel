@@ -7,6 +7,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="../../../../favicon.ico">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
 		<title>Top navbar example for Bootstrap</title>
 
@@ -45,6 +46,18 @@
 					 <li class="nav-item {{  activeMenu('mensaje') }} ">
 						<a class="nav-link"  href="<?php echo route('mensaje.index') ?>">Mensajes</a>
 					</li>
+					<li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Gestiones
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="#">Propiedades</a>
+				          <a class="dropdown-item" href="<?php echo route('clients.index') ?>">Clientes</a>
+				          <a class="dropdown-item" href="#">Alquilar Propiedad</a>
+				      </li>
+					<li class="nav-item {{  activeMenu('mensaje') }} ">
+						<a class="nav-link"  href="<?php echo route('mensaje.index') ?>">Control de alquiler</a>
+					</li>
 				</ul>
 				<ul class="navbar-nav nav-bar-right">
 					 @if(auth()->check())
@@ -80,6 +93,8 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="{{asset('js/app.js')}}"></script>
+		<script src="{{asset('js/plugins/parsley.js')}}"></script>
+		@yield('scripts')
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	</body>
 </html>
