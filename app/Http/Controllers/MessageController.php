@@ -51,6 +51,10 @@ class MessageController extends Controller
         return redirect()->route('mensaje.create')->with('info','Hemos recibido tu mensaje');
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
     /**
      * Display the specified resource.
      *
