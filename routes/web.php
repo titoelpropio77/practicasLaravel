@@ -39,3 +39,4 @@ Route::get('logout','Auth\LoginController@logout');
 Route::resource('usuarios','UsersController');
 Route::resource('mensaje','MessageController');
 Route::resource('clients','ClientController');
+Route::resource('rooms','ClientController');
