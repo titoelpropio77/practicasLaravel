@@ -19,7 +19,6 @@ class CreateRealestateMeters extends Migration
             $table->string('internalcode');
             $table->enum('company',['SAGUAPAB','CRE','OTROS']);
             $table->enum('type',['LUZ','AGUA','OTROS']);
-            $table->timestamps();
         });
     }
 
