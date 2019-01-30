@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+DB::listen(function($query){
+	//echo "<pre>{$query->sql}</pre>";
+});
 Route::get('roles',function(){
 	return \App\Role::with('user')->get();
 	// return \App\Role::all();

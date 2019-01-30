@@ -9,7 +9,7 @@
 		<p>
 			<label for="email">
 				Email
-				<input type="text" class="form-control" name="email" value="{{ $user->email ?? old('email')  }}">
+				<input type="text" class="form-control" name="email" value="<?php echo  $user->email ?? old('email')  ?>">
 				{!! $errors->first('email','<span class="errors">:message</span>') !!}
 			</label>
 		</p>

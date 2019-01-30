@@ -3,7 +3,7 @@
 	<div class="col-sm-4">
 	{!! csrf_field() !!}
 
-	@unless ( $mensaje->user_id)
+	@if ( $showFields)
 	<label>Nombre</label>
 	<input class="form-control" type="text" name="nombre" value="{{ $mensaje->nombre ?? old('nombre') }}">
 	{!! $errors->first('nombre','<span class="errors">:message</span>') !!}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Message;
+use Mail;
 class MessageController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class MessageController extends Controller
     public function index()
     {
 
-        $mensajes = Message::all();
+        $mensajes = Message::with(['user','note'])->get();
         return view('message.index',compact('mensajes'));
     }
 
@@ -41,9 +42,12 @@ class MessageController extends Controller
         if (auth()->check())
         {
             auth()->user()->messages()->save($message)  ;
+            //Mail::send('vista', [], function($ObjetoMessage));
 
         }
-
+         Mail::send('emails.contact', ['msg' =>$message], function($m) use ($message){
+                $m->to($message->email, $message->name)->subject('el mensaje fue recibido');
+            });
         return redirect()->route('mensaje.create')->with('info','Hemos recibido tu mensaje');
     }
 
