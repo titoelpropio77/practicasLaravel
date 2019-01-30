@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+use App\TypeRooms;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -14,17 +15,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $typeRoom = TypeRooms::all();
+        return view('rooms.index',compact('typeRoom'));
     }
 
     /**
@@ -35,29 +27,49 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       if ( $request->ajax() )
+        {
+            try {
+                $result[ 'status' ] = true;
+                $result[ 'message' ] = 'Guardado Correctamente';
+                Room::create($request->all());
+            } catch (Exception $e) {
+                $result[ 'status' ] = false;
+                $result[ 'message' ] = $e->getMessage();
+            }
+            return response()->json( $result );
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Room  $room
+     * @param  \App\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function getAll()
     {
-        //
+        $result['data'] = Room::with('typeRoom')->get();
+        return response()->json($result);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Room  $room
+     * @param  \App\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room $room)
+    public function edit( $room)
     {
-        //
+        try {
+            $clientList[] = Room::find($room);
+            $result[ 'data' ] = $clientList;
+            $result[ 'status' ] = true;
+        } catch (Exception $e) {
+            $result[ 'status' ] = false;
+            $result[ 'message' ] = $e->getMessage();
+        }
+       return response()->json( $result );
     }
 
     /**
@@ -67,9 +79,21 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request,  $id)
     {
-        //
+        if ( $request->ajax() )
+        {
+            try {
+                $result[ 'status' ] = true;
+                $result[ 'message' ] = 'Modificado Correctamente';
+                $room = Room::findOrFail($id);
+                $room->update($request->all());
+            } catch (Exception $e) {
+                $result[ 'status' ] = false;
+                $result[ 'message' ] = $e->getMessage();
+            }
+            return response()->json( $result );
+        }
     }
 
     /**
@@ -80,6 +104,14 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        try {
+            $room->delete();
+            $result['status'] = true;
+        } catch (Exception $e) {
+
+            $result['status'] = false;
+            $result['message'] = $e->getMessage();
+        }
+        return response()->json($result);
     }
 }

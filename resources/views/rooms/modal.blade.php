@@ -15,7 +15,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button class="btn btn-primary" onclick="saveClient()">Guardar</button>
+        <button class="btn btn-primary" onclick="save()">Guardar</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
       </div>
 

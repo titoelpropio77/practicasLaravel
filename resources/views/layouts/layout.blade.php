@@ -9,6 +9,8 @@
 		<link rel="icon" href="../../../../favicon.ico">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('datatables/dataTables.bootstrap.css')}}">
+
 		<title>Top navbar example for Bootstrap</title>
 
 		<!-- Bootstrap core CSS -->
@@ -51,8 +53,10 @@
 				          Gestiones
 				        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				          <a class="dropdown-item" href="#">Propiedades</a>
+				          <a class="dropdown-item" href="<?php echo route('typeroom.index') ?>">Tipo de Propiedades</a>
+				          <a class="dropdown-item" href="<?php echo route('rooms.index') ?>"">Propiedades</a>
 				          <a class="dropdown-item" href="<?php echo route('clients.index') ?>">Clientes</a>
+				          <a class="dropdown-item" href="<?php echo route('meters.index') ?>">Medirores</a>
 				          <a class="dropdown-item" href="#">Alquilar Propiedad</a>
 				      </li>
 					<li class="nav-item {{  activeMenu('mensaje') }} ">
@@ -93,7 +97,9 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="{{asset('js/app.js')}}"></script>
+		<script src="{{asset('datatables/jquery.dataTables.min.js')}}"></script>
 		<script src="{{asset('js/plugins/parsley.js')}}"></script>
+		<script src="{{asset('js/plugins/HERRAMIENTAS.js')}}"></script>
 		@yield('scripts')
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	</body>

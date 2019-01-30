@@ -14,10 +14,10 @@
 		<label for="celphone">Celular:
 			<input type="number" name="celphone" class="form-control" required>
 		</label>
-		<label for="direccion">Direccion:
-			<input type="text" name="direccion" class="form-control" required>
+		<label for="address">Direccion:
+			<input type="text" name="address" class="form-control" required>
 		</label>
-		<label for="ci">CI:
+		<label for="cedula_identidad">CI:
 			<input type="text" name="cedula_identidad" class="form-control" required>
 		</label>
 		<label for="extension">Extensión:

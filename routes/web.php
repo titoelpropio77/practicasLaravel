@@ -40,5 +40,17 @@ Route::post('login','Auth\LoginController@login');
 Route::get('logout','Auth\LoginController@logout');
 Route::resource('usuarios','UsersController');
 Route::resource('mensaje','MessageController');
+//clients
 Route::resource('clients','ClientController');
-Route::resource('rooms','ClientController');
+Route::get('getClientAll', 'ClientController@getAllClient');
+//rooms
+Route::resource('rooms','RoomController');
+Route::get('getRoomAll','RoomController@getAll');
+
+//meters
+Route::resource('meters','MeterController');
+Route::get('getMeterAll','MeterController@getMeterAll');
+
+//room type
+Route::resource('typeroom','TypeRoomsController');
+Route::get('getTypeRoomAll','TypeRoomsController@getTypeRoomAll');

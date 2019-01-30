@@ -14,8 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clientlist = Client::all();
-        return view( 'clients.index', compact( 'clientlist' ) );
+        return view( 'clients.index' );
     }
 
     /**
@@ -36,20 +35,25 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        if ( $request->ajax() ) 
+        if ( $request->ajax() )
         {
             try {
                 $result[ 'status' ] = true;
                 $result[ 'message' ] = 'Guardado Correctamente';
                 Client::create($request->all());
-                return response()->json( $result );    
             } catch (Exception $e) {
-                
+                $result[ 'status' ] = false;
+                $result[ 'message' ] = $e->getMessage();
             }
-            
+            return response()->json( $result );
         }
     }
 
+    public function getAllClient()
+    {
+        $result[ 'data' ] = Client::all();
+        return response()->json($result);
+    }
     /**
      * Display the specified resource.
      *
@@ -75,9 +79,11 @@ class ClientController extends Controller
             $result[ 'status' ] = true;
             return response()->json( $result );
         } catch (Exception $e) {
-            
+            $result[ 'status' ] = false;
+            $result[ 'message' ] = $e->getMessage();
         }
-        
+       return response()->json( $result );
+
     }
 
     /**
@@ -100,6 +106,15 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        try {
+            $client->delete();
+            $result['status'] = true;
+        } catch (Exception $e) {
+
+            $result['status'] = false;
+            $result['message'] = $e->getMessage();
+        }
+        return response()->json($result);
     }
+
 }
