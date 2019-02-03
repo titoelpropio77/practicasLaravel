@@ -556,9 +556,135 @@ function MessageAlerfify( status, message )
         case 'warning':
         alertify.alert('<span style="font-weight: bold;    color: blue;">Informacion</span>', message, function () {
                 alertify.message('OK');
-                
+
             });
+        break;
+        case 'sucesss':
+         alertify.notify(message, 'success', 5, function(){  console.log('dismissed'); });
         break;
 
     }
+}
+
+function getDataByIdInputs( id )
+{
+    cargando();
+    $.ajax({
+        url : url+'/'+id+'/edit',
+        type : 'GET',
+        success : function( response )
+        {
+            if ( response.status )
+            {
+            $( FIELD_FORM.id_edit ).val( response.data[0]['id']  );
+            for (var key in response.data[0])
+            {
+                $( FIELD_FORM[key] ).val( response.data[0][key] );
+            }
+            }else
+            {
+               MessageAlerfify('warning', response.message );
+               $('input[id]').val("");
+            }
+            concatUrl = '/'+response.data[0]['id'];
+        cerrarCargando();
+        },
+         error: function( xhr, ajaxOptions, thrownError )
+        {
+           failErrors( xhr, ajaxOptions, thrownError );
+        }
+    });
+}
+function closeModal()
+{
+    $('#myModal').modal('hide');
+}
+function cleanForm()
+{
+    $('input[name]').val('');
+}
+
+function deleted(id)
+{
+    cargando();
+    $.ajax({
+        url: url+'/'+id,
+        type: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success : function(response)
+        {
+            cerrarCargando();
+            getAll();
+            return true;
+        },
+        error: function( xhr, ajaxOptions, thrownError )
+        {
+           failErrors( xhr, ajaxOptions, thrownError );
+        }
+    });
+}
+var typeSend = '';
+var concatUrl = '';
+function openModal( type )
+{
+    cleanForm();
+    $('#myModal').modal('show');
+    if(  type == 'save' )
+    {
+        typeSend = 'POST';
+        concatUrl = '';
+        $('#modal-title').text('Crear ' + title);
+        return;
+    }
+    typeSend = 'PUT';
+    $('#modal-title').text('Modificar ' + title);
+}
+function save()
+{
+    cargando();
+    var formData = $('#form-data').serializeArray();
+    if (  $('#form-data').parsley().validate() )
+    {
+
+        $.ajax({
+            url : url+concatUrl,
+             headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+            type : typeSend,
+            data : formData,
+            success : function( response )
+            {
+               if ( response.status )
+                {
+                    getAll();
+                    closeModal();
+                }
+                else
+                {
+                   MessageAlerfify('warning', response.message );
+                }
+                cerrarCargando();
+            },
+             error: function( xhr, ajaxOptions, thrownError )
+            {
+               failErrors( xhr, ajaxOptions, thrownError );
+            }
+
+        });
+    }
+}
+function initDataTable()
+{
+dataTableDetail = $('#dataTable').DataTable({
+        "pagingType": "full_numbers",
+        "destroy": true,
+        "order": [[0, "asc"]],
+        "scrollY": "418px",
+        "scrollCollapse": true,
+        "paging": false,
+        retrieve: true
+    });
 }

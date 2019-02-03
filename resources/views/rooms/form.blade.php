@@ -37,6 +37,15 @@
 				@endforeach
 			</select>
 		</div>
+		<div class="col-lg-6">
+			<label for="type">ESTADO:</label>
+			<select class="form-control" name="typerooms_id">
+				<option>Seleccione estado</option>
+				<option value="LIBRE">LIBRE</option>
+				<option value="OCUPADO">OCUPADO</option>
+				<option value="REFACCION">REFACCION</option>
+			</select>
+		</div>
 		</div>
 	</div>
 </form>

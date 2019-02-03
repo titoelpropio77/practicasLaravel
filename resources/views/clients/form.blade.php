@@ -1,6 +1,6 @@
 <form id="form-data" enctype="multipart/form-data">
 	<div class="">
-		<input type="hidden" name="client_id">
+		<input type="hidden" name="id_edit">
 		{!! csrf_field() !!}
 		<label for="name">Nombre:
 			<input type="text" name="name" class="form-control" required>

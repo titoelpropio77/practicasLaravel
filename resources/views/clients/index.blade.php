@@ -1,9 +1,10 @@
 @extends('layouts.layout')
 @section('content')
-@include('clients.modal')
+ @include( 'modalGeneral',['ruta'=> 'clients', 'idItem' => 'id_edit'] )
 <h1>Clientes </h1>
 <div class="row">
 <button class="btn btn-success float-right" onclick="openModal('save')">Crear Nuevo Cliente</button>
+<script type="text/javascript">var title ='{{$title}}'</script>
 </div>
 <div class="row">
 <div class="col-lg-12">

@@ -17,7 +17,8 @@ class Room extends Model
     	'address',
     	'description_details',
     	'number_room',
-    	'business_id',
+        'business_id',
+    	'status',
     	'typerooms_id'
     ];
     function typeRoom()

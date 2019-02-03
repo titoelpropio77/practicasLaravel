@@ -14,7 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view( 'clients.index' );
+        return view( 'clients.index',['title' =>'Cliente'] );
     }
 
     /**
@@ -93,9 +93,21 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
+        if ( $request->ajax() )
+        {
+            try {
+                $result[ 'status' ] = true;
+                $result[ 'message' ] = 'Modificado Correctamente';
+                $typeRooms = Client::findOrFail($id);
+                $typeRooms->update($request->all());
+            } catch (Exception $e) {
+                $result[ 'status' ] = false;
+                $result[ 'message' ] = $e->getMessage();
+            }
+            return response()->json( $result );
+        }
     }
 
     /**

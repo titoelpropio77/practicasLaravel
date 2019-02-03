@@ -54,3 +54,7 @@ Route::get('getMeterAll','MeterController@getMeterAll');
 //room type
 Route::resource('typeroom','TypeRoomsController');
 Route::get('getTypeRoomAll','TypeRoomsController@getTypeRoomAll');
+
+
+//detail alquiler
+Route::resource( 'detailsrental', 'DetailsRentalController' );
